@@ -1,0 +1,1 @@
+console.log('The Home Page Script has entered the chat!');

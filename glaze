@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+const args = process.argv.slice(2);
+
+const usage = `\n
+Usage: glaze -l layout-name.html
+Options: -l <filename> Scaffold a new Layout File into /layouts/
+\n`;
+
+if ((args.length !== 2 || args[0] !== '-l') || (args.length === 1 && args[0] === '-h')) {
+  console.log(usage);
+  process.exit(1);
+}
+
+const layoutName = args[1];
+const layoutPath = path.join(__dirname, 'layouts', layoutName);
+
+if (fs.existsSync(layoutPath)) {
+  console.log(`❌ Layout already exists: layouts/${layoutName}`);
+  process.exit(1);
+}
+
+const template = `\
+<template id="glaze-template">
+  <!-- Your Custom Layout Code Goes Here (top/header/nav)... -->
+
+  <div class="glaze-container">
+    <div class="glaze-content">
+      <main id="glaze-main" class="glaze-main"></main>
+    </div>
+  </div>
+
+  <!-- Your Custom Layout Code Goes Here (bottom/footer)... -->
+</template>
+`;
+
+fs.writeFileSync(layoutPath, template, 'utf8');
+console.log(`🍩 New Glaze Layout Scaffolded: layouts/${layoutName}`);

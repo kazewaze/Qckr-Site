@@ -1,0 +1,1 @@
+console.log('The Contact Page Script has entered the chat!');

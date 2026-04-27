@@ -1,0 +1,1 @@
+console.log('The About Page Script has entered the chat!');
